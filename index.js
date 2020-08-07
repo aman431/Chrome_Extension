@@ -9,15 +9,21 @@ function weatherBall(cityId){
 	fetch(url)
 	.then(function(resp){ return resp.json() })
 	.then(function(data){
+		console.log(data);
 		draw(data);
-		//console.log(data);
+		console.log(data);
 	})
 	.catch(function(){
 	});
 }
+function celCelsius(temp){
+	let cell = Math.floor(temp-273.15);
+	return cell;
+}
 function draw(d){
 	//Calculating Celcuis Fahrenheit !!
-	var celcuis = Math.round(parseFloat(d.main.temp) - 273.15);
+	//var celcuis = Math.round(parseFloat(d.main.temp) - 273.15);
+	var celcuis = Math.floor(temp-273.15);
 	var far = Math.floor(((parseFloat(d.main.temp)-273.15)*1.8)+32);
 	var description = d.weather[0].main;
 	let today = new Date();
@@ -29,13 +35,19 @@ function draw(d){
 	let years = ['January','February','March','AprilMay','June', 'August','September','October','November',"December"];
 	let day_name = weekday[day];
 	let month_name = years[month];
+	let a = celCelsius(d.main.temp_min);
+	let b = celCelsius(d.main.temp_max);
+	console.log(b);
+	console.log(a);
 	let result = day_name+" "+date+" "+month_name+" "+year;
 	document.getElementById('location').innerHTML = d.name+','+d.sys.country;
 	document.getElementById('date').innerHTML = result;
-	document.getElementById('temp').innerHTML = celcuis + '&deg'+'c';
+	document.getElementById('temp').innerHTML = celCelsius(d.main.temp) + '&deg'+'c';
+	document.getElementById('temp_max').innerHTML = celCelsius(d.main.temp_max) + '&deg'+'c';
+	document.getElementById('temp_min').innerHTML = a + '&deg'+'c';
 	document.getElementById('description').innerHTML = description;
-}
 
+}
 let a = document.getElementById('search');	
 a.addEventListener('keydown', (e) => {
 	if(e.key === 'Enter'){
