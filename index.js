@@ -1,7 +1,8 @@
 var name = prompt("what is your name?")
 alert("Hello " + name);
+document.getElementById('Name').innerHTML = "Hello "+name+" !!";
 const a1 = document.querySelector('.weather');
-function weatherBall(cityId){
+const weatherBall = (cityId) =>{
 	//Calling a Api with url 
 	let apiKey = 'dd4b2c0bf6ced9e46923c2c31cc3b825';
 	//let city = 'pune';
@@ -16,11 +17,11 @@ function weatherBall(cityId){
 	.catch(function(){
 	});
 }
-function celCelsius(temp){
+const celCelsius = (temp) =>{
 	let cell = Math.floor(temp-273.15);
 	return cell;
 }
-function draw(d){
+const draw = (d) =>{
 	//Calculating Celcuis Fahrenheit !!
 	//var celcuis = Math.round(parseFloat(d.main.temp) - 273.15);
 	var celcuis = Math.floor(temp-273.15);
